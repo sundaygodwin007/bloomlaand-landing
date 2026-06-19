@@ -97,6 +97,13 @@ const cardEmail = document.getElementById('cardEmail');
 
 let _pendingPayment = { provider: null, amount: 0, currency: 'NGN' };
 
+// Prevent background scrolling when any overlay/modal is open
+const overlayObserver = new MutationObserver(() => {
+  const anyOpen = document.querySelectorAll('.modal-overlay.open, .nav__overlay.open, .sidebar__overlay.open, .nav__mobile.open').length > 0;
+  document.body.style.overflow = anyOpen ? 'hidden' : '';
+});
+overlayObserver.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] });
+
 function openPaymentInfo(provider, amount, currency='NGN'){
   _pendingPayment = { provider, amount, currency };
   paymentInfoAmount.textContent = `${currency === 'NGN' ? '₦' : '$'}${parseFloat(amount).toLocaleString()} `;

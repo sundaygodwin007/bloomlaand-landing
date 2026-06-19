@@ -1203,6 +1203,7 @@ body {
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(4px);
+  overflow-y: auto;
 }
 
 .modal-overlay.open { display: flex; }
@@ -1217,6 +1218,8 @@ body {
   position: relative;
   box-shadow: 0 24px 80px rgba(0,0,0,0.2);
   animation: modal-in 0.35s cubic-bezier(0.4,0,0.2,1);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 @keyframes modal-in {
