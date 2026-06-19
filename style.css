@@ -660,7 +660,244 @@ body {
   color: rgba(255,255,255,0.4);
 }
 
-/* ─── PROBLEM SECTION ─── */
+/* ─── WALLET NAV BUTTON ─── */
+.btn--wallet {
+  background: transparent;
+  color: var(--gold);
+  border: 1.5px solid rgba(232,184,75,0.4);
+  margin-right: 4px;
+}
+
+.btn--wallet:hover {
+  background: rgba(232,184,75,0.1);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.nav__mobile-wallet {
+  color: var(--gold) !important;
+  font-weight: 700 !important;
+}
+
+/* ─── ESCROW SECTION ─── */
+.escrow { background: var(--green-deep); }
+
+.escrow__layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 64px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+/* Mini wallet card */
+.escrow__card-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 100px;
+}
+
+.escrow__mini-card {
+  width: 100%;
+  background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-deep) 60%, #061A10 100%);
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.escrow__mini-card::before {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: rgba(232,184,75,0.07);
+  border-radius: 50%;
+  top: -50px;
+  right: -40px;
+}
+
+.escrow__mini-card__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 16px;
+}
+
+.escrow__mini-card__balance {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+
+.escrow__mini-card__balance span {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+}
+
+.escrow__mini-card__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+
+.escrow__mini-card__chip {
+  position: absolute;
+  width: 28px;
+  height: 22px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+  border-radius: 4px;
+  bottom: 24px;
+  left: 24px;
+}
+
+.escrow__wallet-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 15px;
+  padding: 14px;
+}
+
+.escrow__wallet-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
+
+.escrow__providers {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.escrow__provider-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+
+/* Escrow steps */
+.escrow__steps {
+  display: flex;
+  flex-direction: column;
+}
+
+.escrow__step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.escrow__step-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  background: rgba(232,184,75,0.1);
+  border: 1px solid rgba(232,184,75,0.2);
+  border-radius: 8px;
+  padding: 6px 10px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.escrow__step-body h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.escrow__step-body p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+}
+
+.escrow__connector {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, rgba(232,184,75,0.3), rgba(232,184,75,0.05));
+  margin-left: 26px;
+  margin: 12px 0 12px 26px;
+}
+
+/* Escrow features grid */
+.escrow__features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.escrow__feature {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  transition: var(--transition);
+}
+
+.escrow__feature:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(232,184,75,0.25);
+  transform: translateY(-3px);
+}
+
+.escrow__feature-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.escrow__feature h4 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.escrow__feature p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+}
+
+/* Escrow responsive */
+@media (max-width: 1024px) {
+  .escrow__layout { grid-template-columns: 1fr; gap: 40px; }
+  .escrow__card-preview { position: static; max-width: 360px; margin: 0 auto; }
+  .escrow__features { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .escrow__features { grid-template-columns: 1fr; }
+  .btn--wallet { display: none; }
+}
+
+
 .problem {
   background: var(--cream);
 }

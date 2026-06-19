@@ -21,6 +21,7 @@
         <li><a href="#how">How It Works</a></li>
         <li><a href="#founder">Our Story</a></li>
       </ul>
+      <a href="wallet.html" class="btn btn--nav btn--wallet">💳 Wallet</a>
       <a href="#waitlist" class="btn btn--nav">Join Waitlist</a>
       <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -33,6 +34,7 @@
       <a href="#solution">Solution</a>
       <a href="#how">How It Works</a>
       <a href="#founder">Our Story</a>
+      <a href="wallet.html" class="nav__mobile-wallet">💳 Open Wallet</a>
       <a href="#waitlist" class="btn btn--nav">Join Waitlist</a>
     </div>
   </nav>
@@ -273,7 +275,112 @@
     </div>
   </section>
 
-  <!-- SECTION 5: WAITLIST -->
+  <!-- SECTION 5: WALLET & ESCROW -->
+  <section class="escrow section section--dark" id="escrow">
+    <div class="container">
+      <div class="section-label section-label--light">Built-in Protection</div>
+      <h2 class="section-title section-title--light">Your Money is Safe. Always.</h2>
+      <p class="section-intro section-intro--light">Every transaction on Bloomlaand is protected by our escrow system — funds are only released when both parties are satisfied.</p>
+
+      <div class="escrow__layout">
+
+        <!-- WALLET CARD PREVIEW -->
+        <div class="escrow__card-preview">
+          <div class="escrow__mini-card">
+            <div class="escrow__mini-card__label">Bloomlaand Wallet</div>
+            <div class="escrow__mini-card__balance">₦ 24,500<span>.00</span></div>
+            <div class="escrow__mini-card__row">
+              <span>Adewale Bloom</span>
+              <span>BL-20847</span>
+            </div>
+            <div class="escrow__mini-card__chip"></div>
+          </div>
+          <a href="wallet.html" class="btn btn--primary escrow__wallet-btn">
+            💳 Open My Wallet
+          </a>
+          <p class="escrow__wallet-note">Powered by Paystack & Flutterwave</p>
+          <div class="escrow__providers">
+            <div class="escrow__provider-badge">Paystack</div>
+            <div class="escrow__provider-badge">Flutterwave</div>
+            <div class="escrow__provider-badge">256-bit SSL</div>
+          </div>
+        </div>
+
+        <!-- ESCROW STEPS -->
+        <div class="escrow__steps">
+          <div class="escrow__step">
+            <div class="escrow__step-num">01</div>
+            <div class="escrow__step-body">
+              <h4>Buyer Pays into Escrow</h4>
+              <p>When a transaction begins, funds are held securely in a Bloomlaand escrow vault — not released to the seller yet. The buyer's money is always protected.</p>
+            </div>
+          </div>
+          <div class="escrow__connector"></div>
+          <div class="escrow__step">
+            <div class="escrow__step-num">02</div>
+            <div class="escrow__step-body">
+              <h4>Service or Goods Delivered</h4>
+              <p>The seller completes the service, delivers the product, or fulfills the agreement. Both parties can track status in real time through the platform.</p>
+            </div>
+          </div>
+          <div class="escrow__connector"></div>
+          <div class="escrow__step">
+            <div class="escrow__step-num">03</div>
+            <div class="escrow__step-body">
+              <h4>Buyer Confirms & Funds Release</h4>
+              <p>Once the buyer confirms satisfaction, funds are released to the seller's Bloomlaand wallet instantly. Disputes trigger a fair review process.</p>
+            </div>
+          </div>
+          <div class="escrow__connector"></div>
+          <div class="escrow__step">
+            <div class="escrow__step-num">04</div>
+            <div class="escrow__step-body">
+              <h4>Dispute? We Step In</h4>
+              <p>If there's a disagreement, Bloomlaand's trust team reviews evidence from both sides and makes a fair ruling. No one loses money to dishonesty.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ESCROW FEATURES -->
+      <div class="escrow__features">
+        <div class="escrow__feature">
+          <div class="escrow__feature-icon">🔒</div>
+          <h4>Funds Held Securely</h4>
+          <p>Money sits in a protected vault until delivery is confirmed. Nobody can access it prematurely.</p>
+        </div>
+        <div class="escrow__feature">
+          <div class="escrow__feature-icon">⚡</div>
+          <h4>Instant Release</h4>
+          <p>Once confirmed, funds hit the seller's wallet in seconds — no waiting days for bank transfers.</p>
+        </div>
+        <div class="escrow__feature">
+          <div class="escrow__feature-icon">⚖️</div>
+          <h4>Fair Dispute Resolution</h4>
+          <p>Our trust team investigates every dispute with evidence from both parties and resolves fairly.</p>
+        </div>
+        <div class="escrow__feature">
+          <div class="escrow__feature-icon">🌍</div>
+          <h4>Multi-currency Support</h4>
+          <p>Escrow works across NGN, USD, GHS, KES and more — powered by Paystack and Flutterwave.</p>
+        </div>
+        <div class="escrow__feature">
+          <div class="escrow__feature-icon">📋</div>
+          <h4>Full Audit Trail</h4>
+          <p>Every escrow transaction is logged with timestamps and evidence — complete transparency always.</p>
+        </div>
+        <div class="escrow__feature">
+          <div class="escrow__feature-icon">🛡️</div>
+          <h4>Zero Fraud Tolerance</h4>
+          <p>Verified accounts, transaction limits, and fraud detection keep your money and identity safe.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 6: WAITLIST -->
   <section class="waitlist section section--gold" id="waitlist">
     <div class="container">
       <div class="section-label section-label--dark">Early Access</div>

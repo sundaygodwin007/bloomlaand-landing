@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bloomlaand Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Paystack -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <!-- Flutterwave -->
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
+  <link rel="stylesheet" href="wallet.css"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__logo">
+      <a href="index.html">Bloom<span>laand</span></a>
+    </div>
+    <nav class="sidebar__nav">
+      <a href="#" class="sidebar__link sidebar__link--active">
+        <span class="sidebar__icon">💳</span> Wallet
+      </a>
+      <a href="#" class="sidebar__link">
+        <span class="sidebar__icon">💬</span> Intalock
+      </a>
+      <a href="#" class="sidebar__link">
+        <span class="sidebar__icon">📚</span> Classroom
+      </a>
+      <a href="#" class="sidebar__link">
+        <span class="sidebar__icon">🛍️</span> MarketHub
+      </a>
+      <a href="#" class="sidebar__link">
+        <span class="sidebar__icon">⚙️</span> Settings
+      </a>
+    </nav>
+    <div class="sidebar__user">
+      <div class="sidebar__avatar">A</div>
+      <div class="sidebar__user-info">
+        <strong>Adewale Bloom</strong>
+        <span>@adewale</span>
+      </div>
+      <button class="sidebar__logout" title="Log out">↩</button>
+    </div>
+  </aside>
+
+  <!-- MOBILE TOP BAR -->
+  <header class="topbar">
+    <button class="topbar__toggle" id="sidebarToggle" aria-label="Open menu">☰</button>
+    <a href="index.html" class="topbar__logo">Bloom<span>laand</span></a>
+    <div class="topbar__avatar">A</div>
+  </header>
+  <div class="sidebar__overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">My Wallet</h1>
+        <p class="page-sub">Manage your funds, send money, and pay for Bloomlaand services.</p>
+      </div>
+      <div class="currency-switcher">
+        <button class="currency-btn active" data-currency="NGN">₦ NGN</button>
+        <button class="currency-btn" data-currency="USD">$ USD</button>
+      </div>
+    </div>
+
+    <!-- BALANCE CARDS ROW -->
+    <div class="cards-row">
+
+      <!-- MAIN BALANCE CARD (flip card) -->
+      <div class="balance-card-wrap">
+        <div class="balance-card" id="balanceCard">
+          <!-- FRONT -->
+          <div class="balance-card__front">
+            <div class="balance-card__header">
+              <span class="balance-card__label">Total Balance</span>
+              <button class="balance-card__eye" id="toggleBalance" aria-label="Toggle balance visibility">👁</button>
+            </div>
+            <div class="balance-card__amount" id="balanceDisplay">
+              <span class="balance-card__currency" id="currencySymbol">₦</span>
+              <span id="balanceValue">24,500.00</span>
+            </div>
+            <div class="balance-card__meta">
+              <div>
+                <span class="balance-card__meta-label">Account Name</span>
+                <span class="balance-card__meta-val">Adewale Bloom</span>
+              </div>
+              <div>
+                <span class="balance-card__meta-label">Wallet ID</span>
+                <span class="balance-card__meta-val">BL-20847</span>
+              </div>
+            </div>
+            <div class="balance-card__chip"></div>
+            <div class="balance-card__logo">Bloomlaand</div>
+            <button class="balance-card__flip-btn" id="flipCardBtn">View Details ↻</button>
+          </div>
+          <!-- BACK -->
+          <div class="balance-card__back">
+            <div class="balance-card__back-strip"></div>
+            <div class="balance-card__back-body">
+              <div class="balance-card__back-row">
+                <span>Account Number</span>
+                <strong>0024 8507 41</strong>
+              </div>
+              <div class="balance-card__back-row">
+                <span>Bank</span>
+                <strong>Bloomlaand Finance</strong>
+              </div>
+              <div class="balance-card__back-row">
+                <span>Paystack Ref</span>
+                <strong>PSK-BL20847</strong>
+              </div>
+              <div class="balance-card__back-row">
+                <span>Status</span>
+                <strong class="status-active">● Active</strong>
+              </div>
+            </div>
+            <button class="balance-card__flip-btn" id="flipCardBackBtn">← Back</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stat-cards">
+        <div class="stat-card stat-card--income">
+          <div class="stat-card__icon">↓</div>
+          <div>
+            <span class="stat-card__label">Total Received</span>
+            <strong class="stat-card__value" id="totalIn">₦ 58,000.00</strong>
+          </div>
+        </div>
+        <div class="stat-card stat-card--spend">
+          <div class="stat-card__icon">↑</div>
+          <div>
+            <span class="stat-card__label">Total Spent</span>
+            <strong class="stat-card__value" id="totalOut">₦ 33,500.00</strong>
+          </div>
+        </div>
+        <div class="stat-card stat-card--services">
+          <div class="stat-card__icon">📚</div>
+          <div>
+            <span class="stat-card__label">Services Paid</span>
+            <strong class="stat-card__value">3 Services</strong>
+          </div>
+        </div>
+        <div class="stat-card stat-card--pending">
+          <div class="stat-card__icon">⏳</div>
+          <div>
+            <span class="stat-card__label">Pending</span>
+            <strong class="stat-card__value" id="pendingVal">₦ 0.00</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION TABS -->
+    <div class="action-tabs">
+      <button class="tab-btn active" data-tab="fund">💳 Fund Wallet</button>
+      <button class="tab-btn" data-tab="send">📤 Send Money</button>
+      <button class="tab-btn" data-tab="pay">🛍️ Pay for Services</button>
+      <button class="tab-btn" data-tab="escrow">🔒 Escrow</button>
+      <button class="tab-btn" data-tab="history">📋 History</button>
+    </div>
+
+    <!-- TAB PANELS -->
+    <div class="tab-panels">
+
+      <!-- FUND WALLET -->
+      <div class="tab-panel active" id="tab-fund">
+        <div class="panel-grid">
+          <div class="panel-section">
+            <h3 class="panel-title">Fund via Paystack <span class="badge badge--ngn">NGN</span></h3>
+            <p class="panel-desc">Instant funding with cards, bank transfer, or USSD. Powered by Paystack.</p>
+            <div class="form-group">
+              <label>Amount (₦)</label>
+              <div class="input-prefix">
+                <span>₦</span>
+                <input type="number" id="paystackAmount" placeholder="Enter amount" min="100"/>
+              </div>
+            </div>
+            <div class="quick-amounts">
+              <button class="quick-btn" data-amount="1000" data-target="paystackAmount">₦1,000</button>
+              <button class="quick-btn" data-amount="2000" data-target="paystackAmount">₦2,000</button>
+              <button class="quick-btn" data-amount="5000" data-target="paystackAmount">₦5,000</button>
+              <button class="quick-btn" data-amount="10000" data-target="paystackAmount">₦10,000</button>
+            </div>
+            <button class="pay-btn pay-btn--paystack" id="paystackBtn">
+              <span>Pay with Paystack</span>
+              <img src="https://website-v3-assets.s3.amazonaws.com/assets/img/hero/Paystack-mark-white-twitter.png" alt="Paystack" class="pay-btn__logo" onerror="this.style.display='none'"/>
+            </button>
+            <p class="pay-note">Secured by Paystack. 1.5% + ₦100 fee applies above ₦2,500.</p>
+          </div>
+
+          <div class="panel-divider">
+            <span>or</span>
+          </div>
+
+          <div class="panel-section">
+            <h3 class="panel-title">Fund via Flutterwave <span class="badge badge--multi">Multi-currency</span></h3>
+            <p class="panel-desc">Fund in NGN, USD, GHS, KES and more. Powered by Flutterwave.</p>
+            <div class="form-group">
+              <label>Amount</label>
+              <div class="input-split">
+                <select id="flwCurrency">
+                  <option value="NGN">₦ NGN</option>
+                  <option value="USD">$ USD</option>
+                  <option value="GHS">₵ GHS</option>
+                  <option value="KES">KSh KES</option>
+                </select>
+                <input type="number" id="flutterwaveAmount" placeholder="Enter amount" min="1"/>
+              </div>
+            </div>
+            <div class="quick-amounts">
+              <button class="quick-btn" data-amount="1000" data-target="flutterwaveAmount">₦1,000</button>
+              <button class="quick-btn" data-amount="5000" data-target="flutterwaveAmount">₦5,000</button>
+              <button class="quick-btn" data-amount="10" data-target="flutterwaveAmount">$10</button>
+              <button class="quick-btn" data-amount="50" data-target="flutterwaveAmount">$50</button>
+            </div>
+            <button class="pay-btn pay-btn--flw" id="flutterwaveBtn">
+              <span>Pay with Flutterwave</span>
+            </button>
+            <p class="pay-note">Supports 150+ currencies. Exchange rates apply for non-NGN.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEND MONEY -->
+      <div class="tab-panel" id="tab-send">
+        <div class="panel-single">
+          <h3 class="panel-title">Send Money to a Bloomlaand User</h3>
+          <p class="panel-desc">Transfer funds instantly to any Bloomlaand wallet using their username or wallet ID.</p>
+          <div class="send-form">
+            <div class="form-group">
+              <label>Recipient Username or Wallet ID</label>
+              <div class="input-search">
+                <input type="text" id="recipientInput" placeholder="e.g. @chidi or BL-10234"/>
+                <button class="search-btn" id="searchRecipient">Find</button>
+              </div>
+            </div>
+            <!-- Recipient preview (shown after search) -->
+            <div class="recipient-preview" id="recipientPreview" style="display:none;">
+              <div class="recipient-avatar" id="recipientAvatar">C</div>
+              <div class="recipient-info">
+                <strong id="recipientName">Chidi Okonkwo</strong>
+                <span id="recipientId">BL-10234 · Student</span>
+              </div>
+              <span class="recipient-check">✓</span>
+            </div>
+            <div class="form-group">
+              <label>Amount (₦)</label>
+              <div class="input-prefix">
+                <span>₦</span>
+                <input type="number" id="sendAmount" placeholder="Enter amount" min="50"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Note (optional)</label>
+              <input type="text" id="sendNote" placeholder="e.g. Payment for tutoring session"/>
+            </div>
+            <div class="send-summary" id="sendSummary" style="display:none;">
+              <div class="send-summary__row">
+                <span>Amount</span><strong id="summaryAmount">₦0.00</strong>
+              </div>
+              <div class="send-summary__row">
+                <span>Fee</span><strong>₦0.00</strong>
+              </div>
+              <div class="send-summary__row send-summary__row--total">
+                <span>Total Deducted</span><strong id="summaryTotal">₦0.00</strong>
+              </div>
+            </div>
+            <button class="pay-btn pay-btn--send" id="sendBtn">Send Money →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAY FOR SERVICES -->
+      <div class="tab-panel" id="tab-pay">
+        <div class="services-grid">
+          <div class="service-card" data-service="Classroom Access" data-amount="2500">
+            <div class="service-card__icon">📚</div>
+            <div class="service-card__info">
+              <h4>Classroom Access</h4>
+              <p>Unlock all courses and learning materials for 30 days.</p>
+            </div>
+            <div class="service-card__price">₦2,500<span>/month</span></div>
+            <button class="service-card__btn">Pay Now</button>
+          </div>
+          <div class="service-card" data-service="MarketHub Listing" data-amount="1500">
+            <div class="service-card__icon">🛍️</div>
+            <div class="service-card__info">
+              <h4>MarketHub Listing</h4>
+              <p>List your products or services on MarketHub for 30 days.</p>
+            </div>
+            <div class="service-card__price">₦1,500<span>/month</span></div>
+            <button class="service-card__btn">Pay Now</button>
+          </div>
+          <div class="service-card" data-service="SkillHub Pro" data-amount="3000">
+            <div class="service-card__icon">🎯</div>
+            <div class="service-card__info">
+              <h4>SkillHub Pro</h4>
+              <p>Access premium skill courses and certification tracks.</p>
+            </div>
+            <div class="service-card__price">₦3,000<span>/month</span></div>
+            <button class="service-card__btn">Pay Now</button>
+          </div>
+          <div class="service-card" data-service="Webinar Pass" data-amount="500">
+            <div class="service-card__icon">🎥</div>
+            <div class="service-card__info">
+              <h4>Webinar Pass</h4>
+              <p>Join any single live webinar session on the platform.</p>
+            </div>
+            <div class="service-card__price">₦500<span>/session</span></div>
+            <button class="service-card__btn">Pay Now</button>
+          </div>
+          <div class="service-card" data-service="LinguaBloom" data-amount="2000">
+            <div class="service-card__icon">🌍</div>
+            <div class="service-card__info">
+              <h4>LinguaBloom</h4>
+              <p>Language learning courses with native-speaker sessions.</p>
+            </div>
+            <div class="service-card__price">₦2,000<span>/month</span></div>
+            <button class="service-card__btn">Pay Now</button>
+          </div>
+          <div class="service-card" data-service="Library Premium" data-amount="1000">
+            <div class="service-card__icon">📖</div>
+            <div class="service-card__info">
+              <h4>Library Premium</h4>
+              <p>Unlimited access to the Bloomlaand digital library.</p>
+            </div>
+            <div class="service-card__price">₦1,000<span>/month</span></div>
+            <button class="service-card__btn">Pay Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESCROW -->
+      <div class="tab-panel" id="tab-escrow">
+
+        <!-- ESCROW VAULT SUMMARY -->
+        <div class="escrow-vault">
+          <div class="escrow-vault__icon">🔒</div>
+          <div class="escrow-vault__info">
+            <span class="escrow-vault__label">Funds in Escrow Vault</span>
+            <strong class="escrow-vault__amount" id="escrowVaultAmount">₦ 0.00</strong>
+          </div>
+          <div class="escrow-vault__badge">Protected</div>
+        </div>
+
+        <!-- START ESCROW -->
+        <div class="escrow-layout">
+          <div class="escrow-form-wrap">
+            <h3 class="panel-title">Start an Escrow Transaction</h3>
+            <p class="panel-desc">Lock funds safely until goods or services are delivered and confirmed. Both parties are protected.</p>
+
+            <div class="form-group">
+              <label>Seller Username or Wallet ID</label>
+              <div class="input-search">
+                <input type="text" id="escrowSellerInput" placeholder="e.g. @emeka or BL-20011"/>
+                <button class="search-btn" id="escrowSearchBtn">Find</button>
+              </div>
+            </div>
+
+            <div class="recipient-preview" id="escrowSellerPreview" style="display:none;">
+              <div class="recipient-avatar" id="escrowSellerAvatar">E</div>
+              <div class="recipient-info">
+                <strong id="escrowSellerName">Emeka Nwosu</strong>
+                <span id="escrowSellerId">BL-20011 · Business Owner</span>
+              </div>
+              <span class="recipient-check">✓</span>
+            </div>
+
+            <div class="form-group">
+              <label>Transaction Description</label>
+              <input type="text" id="escrowDesc" placeholder="e.g. Logo design for my startup"/>
+            </div>
+
+            <div class="form-group">
+              <label>Amount (₦)</label>
+              <div class="input-prefix">
+                <span>₦</span>
+                <input type="number" id="escrowAmount" placeholder="Enter amount" min="500"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Auto-release After (if buyer doesn't respond)</label>
+              <select id="escrowTimer">
+                <option value="24">24 hours</option>
+                <option value="48">48 hours</option>
+                <option value="72" selected>72 hours (recommended)</option>
+                <option value="120">5 days</option>
+                <option value="168">7 days</option>
+              </select>
+            </div>
+
+            <div class="escrow-terms">
+              <span>🛡️</span>
+              <p>Funds will be deducted from your wallet and held in the Bloomlaand Escrow Vault. They are released to the seller only when you confirm delivery, or automatically after the chosen period. You can raise a dispute at any time before release.</p>
+            </div>
+
+            <button class="pay-btn pay-btn--paystack" id="startEscrowBtn">🔒 Lock Funds in Escrow</button>
+          </div>
+
+          <!-- ACTIVE ESCROWS -->
+          <div class="escrow-active-wrap">
+            <h3 class="panel-title">Active Escrows</h3>
+            <div class="escrow-list" id="escrowList">
+              <!-- Populated by JS -->
+            </div>
+            <div class="history-empty" id="escrowEmpty">
+              <span>🔓</span>
+              <p>No active escrow transactions.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TRANSACTION HISTORY -->
+      <div class="tab-panel" id="tab-history">
+        <div class="history-header">
+          <h3 class="panel-title">Transaction History</h3>
+          <div class="history-filters">
+            <select id="filterType">
+              <option value="all">All Transactions</option>
+              <option value="credit">Credits</option>
+              <option value="debit">Debits</option>
+              <option value="service">Services</option>
+            </select>
+            <input type="month" id="filterMonth" />
+          </div>
+        </div>
+        <div class="transactions" id="transactionList">
+          <!-- Populated by JS -->
+        </div>
+        <div class="history-empty" id="historyEmpty" style="display:none;">
+          <span>📭</span>
+          <p>No transactions match your filter.</p>
+        </div>
+      </div>
+
+    </div><!-- /tab-panels -->
+  </main><!-- /main -->
+
+  <!-- PAYMENT CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal__close" id="modalClose">✕</button>
+      <div class="modal__icon" id="modalIcon">✓</div>
+      <h3 class="modal__title" id="modalTitle">Payment Successful</h3>
+      <p class="modal__body" id="modalBody">Your wallet has been funded.</p>
+      <div class="modal__detail" id="modalDetail"></div>
+      <button class="pay-btn pay-btn--paystack" id="modalBtn">Done</button>
+    </div>
+  </div>
+
+  <!-- SERVICE PAYMENT MODAL -->
+  <div class="modal-overlay" id="serviceModalOverlay">
+    <div class="modal" id="serviceModal">
+      <button class="modal__close" id="serviceModalClose">✕</button>
+      <div class="modal__icon">🛍️</div>
+      <h3 class="modal__title" id="serviceModalTitle">Confirm Payment</h3>
+      <p class="modal__body" id="serviceModalBody">Pay for this service from your wallet?</p>
+      <div class="modal__detail" id="serviceModalDetail"></div>
+      <div class="modal__actions">
+        <button class="pay-btn pay-btn--ghost" id="serviceModalCancel">Cancel</button>
+        <button class="pay-btn pay-btn--paystack" id="serviceModalConfirm">Confirm Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCROW ACTION MODAL -->
+  <div class="modal-overlay" id="escrowActionOverlay">
+    <div class="modal escrow-modal" id="escrowActionModal">
+      <button class="modal__close" id="escrowActionClose">✕</button>
+      <div class="modal__icon" id="escrowActionIcon">🔒</div>
+      <h3 class="modal__title" id="escrowActionTitle">Escrow Details</h3>
+      <div class="modal__detail" id="escrowActionDetail"></div>
+      <div class="escrow-modal__status" id="escrowModalStatus"></div>
+      <div class="escrow-modal__timer" id="escrowModalTimer"></div>
+      <div class="modal__actions" id="escrowModalActions">
+        <button class="pay-btn pay-btn--ghost" id="escrowDisputeBtn">⚠️ Raise Dispute</button>
+        <button class="pay-btn pay-btn--paystack" id="escrowReleaseBtn">✓ Confirm & Release</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISPUTE MODAL -->
+  <div class="modal-overlay" id="disputeModalOverlay">
+    <div class="modal" id="disputeModal">
+      <button class="modal__close" id="disputeModalClose">✕</button>
+      <div class="modal__icon" style="background:rgba(224,82,82,0.12);color:#E05252;">⚠️</div>
+      <h3 class="modal__title">Raise a Dispute</h3>
+      <p class="modal__body">Describe the issue. Our trust team will review within 24–48 hours. Funds remain frozen until resolved.</p>
+      <div class="form-group" style="text-align:left;">
+        <label>Reason for Dispute</label>
+        <select id="disputeReason">
+          <option value="">Select a reason</option>
+          <option value="not-delivered">Service/goods not delivered</option>
+          <option value="incomplete">Incomplete or partial delivery</option>
+          <option value="quality">Quality doesn't match description</option>
+          <option value="fraud">Suspected fraud</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group" style="text-align:left;">
+        <label>Details</label>
+        <textarea id="disputeDetails" placeholder="Explain what went wrong..." style="width:100%;padding:12px 14px;border-radius:8px;border:1.5px solid rgba(0,0,0,0.1);font-family:var(--font-body);font-size:14px;resize:vertical;min-height:100px;background:var(--cream);outline:none;"></textarea>
+      </div>
+      <div class="modal__actions">
+        <button class="pay-btn pay-btn--ghost" id="disputeCancel">Cancel</button>
+        <button class="pay-btn" style="background:#E05252;color:white;" id="disputeSubmit">Submit Dispute</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="wallet.js"></script>
+</body>
+</html>
