@@ -1551,6 +1551,7 @@ body {
   .main {
     margin-left: 0;
     padding: 80px 20px 40px;
+    padding-right: 28px; /* extra right padding on mobile */
   }
 
   .cards-row {
