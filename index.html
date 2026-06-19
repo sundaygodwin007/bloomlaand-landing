@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bloomlaand — Digital Value Ecosystem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">Bloom<span>laand</span></a>
+      <ul class="nav__links">
+        <li><a href="#problem">Why Us</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#founder">Our Story</a></li>
+      </ul>
+      <a href="#waitlist" class="btn btn--nav">Join Waitlist</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__overlay" id="navOverlay"></div>
+    <div class="nav__mobile" id="navMobile">
+      <button class="nav__mobile-close" id="navClose" aria-label="Close menu">✕</button>
+      <a href="#problem">Why Us</a>
+      <a href="#solution">Solution</a>
+      <a href="#how">How It Works</a>
+      <a href="#founder">Our Story</a>
+      <a href="#waitlist" class="btn btn--nav">Join Waitlist</a>
+    </div>
+  </nav>
+
+  <!-- SECTION 1: HERO -->
+  <section class="hero" id="home">
+    <div class="hero__bg-orbs">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+      <div class="orb orb--3"></div>
+    </div>
+    <div class="hero__content">
+      <div class="hero__text">
+        <div class="hero__eyebrow">
+          <span class="dot"></span> Now Accepting Early Access
+        </div>
+        <h1 class="hero__logo">Bloom<span>laand</span></h1>
+        <h2 class="hero__headline">
+          Transforming fragmented communication into learning, opportunity, and value.
+        </h2>
+        <p class="hero__sub">
+          Bloomlaand connects communities through social interaction, education, and commerce in one digital ecosystem.
+        </p>
+        <div class="hero__cta">
+          <a href="#waitlist" class="btn btn--primary">Join Waitlist</a>
+          <a href="#solution" class="btn btn--ghost">Learn More <span class="arrow">↓</span></a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <strong>3</strong>
+            <span>Core Modules</span>
+          </div>
+          <div class="stat__divider"></div>
+          <div class="stat">
+            <strong>1</strong>
+            <span>Ecosystem</span>
+          </div>
+          <div class="stat__divider"></div>
+          <div class="stat">
+            <strong>∞</strong>
+            <span>Possibilities</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="orbit-system" id="orbitSystem">
+          <div class="orbit-ring orbit-ring--outer">
+            <div class="orbit-node" data-label="Intalock" data-icon="💬" style="--angle: 0deg;">
+              <div class="node-dot"></div>
+              <div class="node-label">Intalock</div>
+            </div>
+            <div class="orbit-node" data-label="Classroom" data-icon="📚" style="--angle: 120deg;">
+              <div class="node-dot"></div>
+              <div class="node-label">Classroom</div>
+            </div>
+            <div class="orbit-node" data-label="MarketHub" data-icon="🛒" style="--angle: 240deg;">
+              <div class="node-dot"></div>
+              <div class="node-label">MarketHub</div>
+            </div>
+          </div>
+          <div class="orbit-ring orbit-ring--inner">
+            <div class="orbit-node orbit-node--small" style="--angle: 60deg;"><div class="node-dot"></div></div>
+            <div class="orbit-node orbit-node--small" style="--angle: 180deg;"><div class="node-dot"></div></div>
+            <div class="orbit-node orbit-node--small" style="--angle: 300deg;"><div class="node-dot"></div></div>
+          </div>
+          <div class="orbit-center">
+            <div class="orbit-center__inner">
+              <span class="orbit-center__letter">B</span>
+            </div>
+          </div>
+          <svg class="orbit-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="140" fill="none" stroke="rgba(232,184,75,0.2)" stroke-width="1" stroke-dasharray="4 8"/>
+            <circle cx="200" cy="200" r="80" fill="none" stroke="rgba(168,197,160,0.15)" stroke-width="1" stroke-dasharray="2 6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll-cue">
+      <div class="scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THE PROBLEM -->
+  <section class="problem section" id="problem">
+    <div class="container">
+      <div class="section-label">The Challenge</div>
+      <h2 class="section-title">Why Bloomlaand?</h2>
+      <p class="section-intro">The digital world for students and communities is broken. Here's what we see every day.</p>
+      <div class="problem__grid">
+        <div class="problem-card" data-index="01">
+          <div class="problem-card__icon">📲</div>
+          <h3>Group Overload</h3>
+          <p>Students are added to countless groups across multiple platforms with no structure, context, or purpose.</p>
+        </div>
+        <div class="problem-card" data-index="02">
+          <div class="problem-card__icon">📁</div>
+          <h3>Scattered Resources</h3>
+          <p>Learning materials are fragmented across WhatsApp, Telegram, Google Drive, and email threads.</p>
+        </div>
+        <div class="problem-card" data-index="03">
+          <div class="problem-card__icon">🔍</div>
+          <h3>Hidden Opportunities</h3>
+          <p>Jobs, scholarships, and business opportunities are difficult to discover without the right network.</p>
+        </div>
+        <div class="problem-card" data-index="04">
+          <div class="problem-card__icon">🧩</div>
+          <h3>Fragmented Communities</h3>
+          <p>Communities are split across platforms, making collaboration, trust, and growth nearly impossible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: THE SOLUTION -->
+  <section class="solution section section--dark" id="solution">
+    <div class="container">
+      <div class="section-label section-label--light">Our Answer</div>
+      <h2 class="section-title section-title--light">Introducing the Digital Value Ecosystem</h2>
+      <p class="section-intro section-intro--light">Three powerful modules. One seamless platform. Infinite value.</p>
+
+      <div class="solution__cards">
+        <div class="sol-card">
+          <div class="sol-card__top">
+            <div class="sol-card__icon">💬</div>
+            <div class="sol-card__tag">Module 01</div>
+          </div>
+          <h3 class="sol-card__title">Intalock</h3>
+          <p class="sol-card__desc">Your community hub. Structured groups, meaningful conversations, and real connections — built for communities that want to grow with purpose.</p>
+          <ul class="sol-card__features">
+            <li>Organized community groups</li>
+            <li>Rich social interaction</li>
+            <li>Real-time messaging</li>
+          </ul>
+        </div>
+        <div class="sol-card sol-card--featured">
+          <div class="sol-card__badge">Core Module</div>
+          <div class="sol-card__top">
+            <div class="sol-card__icon">📚</div>
+            <div class="sol-card__tag">Module 02</div>
+          </div>
+          <h3 class="sol-card__title">Classroom</h3>
+          <p class="sol-card__desc">Structured learning and collaboration for students and educators. Course materials, assignments, and progress tracking — all in one space.</p>
+          <ul class="sol-card__features">
+            <li>Organized course materials</li>
+            <li>Collaborative workspaces</li>
+            <li>Progress & assessment tools</li>
+          </ul>
+        </div>
+        <div class="sol-card">
+          <div class="sol-card__top">
+            <div class="sol-card__icon">🛍️</div>
+            <div class="sol-card__tag">Module 03</div>
+          </div>
+          <h3 class="sol-card__title">MarketHub</h3>
+          <p class="sol-card__desc">Discover business opportunities, showcase your skills, and connect with the right people. Commerce meets community.</p>
+          <ul class="sol-card__features">
+            <li>Business opportunity discovery</li>
+            <li>Product & service listings</li>
+            <li>Community-powered commerce</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="coming-soon">
+        <div class="coming-soon__icon">🚀</div>
+        <p><strong>Coming in Future Phases:</strong> SkillHub, Webinar, LinguaBloom, and Library — expanding the ecosystem even further.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: HOW IT WORKS -->
+  <section class="how section" id="how">
+    <div class="container">
+      <div class="section-label">The Journey</div>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-intro">Your path from community to opportunity — seamlessly connected.</p>
+      <div class="flow">
+        <div class="flow__step" id="flowStep1">
+          <div class="flow__icon">💬</div>
+          <div class="flow__content">
+            <h3>Connect</h3>
+            <p class="flow__module">Intalock</p>
+            <p>Join or create a structured community. Meet peers, collaborators, and mentors who share your vision.</p>
+          </div>
+        </div>
+        <div class="flow__arrow" id="flowArrow1">
+          <div class="arrow-line"></div>
+          <span>→</span>
+        </div>
+        <div class="flow__step" id="flowStep2">
+          <div class="flow__icon">📚</div>
+          <div class="flow__content">
+            <h3>Learn</h3>
+            <p class="flow__module">Classroom</p>
+            <p>Access structured learning materials, collaborate on projects, and grow your skills inside your community.</p>
+          </div>
+        </div>
+        <div class="flow__arrow" id="flowArrow2">
+          <div class="arrow-line"></div>
+          <span>→</span>
+        </div>
+        <div class="flow__step" id="flowStep3">
+          <div class="flow__icon">🛍️</div>
+          <div class="flow__content">
+            <h3>Thrive</h3>
+            <p class="flow__module">MarketHub</p>
+            <p>Discover opportunities, launch your business, and turn your community connections into real-world value.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow__mobile">
+        <div class="flow-mobile__item">
+          <div class="flow-mobile__num">1</div>
+          <div class="flow-mobile__body">
+            <h4>Connect via Intalock</h4>
+            <p>Build your community</p>
+          </div>
+        </div>
+        <div class="flow-mobile__connector"></div>
+        <div class="flow-mobile__item">
+          <div class="flow-mobile__num">2</div>
+          <div class="flow-mobile__body">
+            <h4>Learn in Classroom</h4>
+            <p>Grow your skills</p>
+          </div>
+        </div>
+        <div class="flow-mobile__connector"></div>
+        <div class="flow-mobile__item">
+          <div class="flow-mobile__num">3</div>
+          <div class="flow-mobile__body">
+            <h4>Thrive on MarketHub</h4>
+            <p>Unlock opportunities</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: WAITLIST -->
+  <section class="waitlist section section--gold" id="waitlist">
+    <div class="container">
+      <div class="section-label section-label--dark">Early Access</div>
+      <h2 class="section-title section-title--dark">Join the Waitlist</h2>
+      <p class="section-intro section-intro--dark">Be among the first to experience Bloomlaand. Shape the ecosystem from day one.</p>
+
+      <div class="waitlist__wrapper">
+        <div class="waitlist__perks">
+          <h3>Why join early?</h3>
+          <ul>
+            <li><span>✓</span> Priority access to all modules</li>
+            <li><span>✓</span> Shape the product with your feedback</li>
+            <li><span>✓</span> Exclusive early-adopter benefits</li>
+            <li><span>✓</span> Direct line to the founding team</li>
+            <li><span>✓</span> Be part of something that matters</li>
+          </ul>
+          <div class="waitlist__count">
+            <strong id="waitlistCount">0</strong>
+            <span>people have joined</span>
+          </div>
+        </div>
+        <form class="waitlist__form" id="waitlistForm" action="https://formspree.io/f/your-form-id" method="POST">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required/>
+          </div>
+          <div class="form-group">
+            <label for="school">University / School</label>
+            <input type="text" id="school" name="school" placeholder="Your institution"/>
+          </div>
+          <div class="form-group">
+            <label for="role">Your Role</label>
+            <select id="role" name="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="student">Student</option>
+              <option value="tutor">Tutor</option>
+              <option value="business-owner">Business Owner</option>
+              <option value="creator">Creator</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn--submit">
+            <span class="btn-text">Join Early Access</span>
+            <span class="btn-icon">→</span>
+          </button>
+          <p class="form-note">No spam. Ever. Unsubscribe any time.</p>
+          <div class="form-success" id="formSuccess">
+            <div class="form-success__icon">🎉</div>
+            <h4>You're on the list!</h4>
+            <p>Welcome to Bloomlaand. We'll be in touch soon.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: FOUNDER STORY -->
+  <section class="founder section section--dark" id="founder">
+    <div class="container">
+      <div class="section-label section-label--light">Our Story</div>
+      <div class="founder__wrapper">
+        <div class="founder__quote-mark">"</div>
+        <blockquote class="founder__quote">
+          Bloomlaand was born from lived experience — the frustration of being added to countless unstructured groups, watching important learning materials get buried in chat threads, and seeing talented people miss life-changing opportunities simply because they weren't in the right circle.
+        </blockquote>
+        <p class="founder__body">
+          We built Bloomlaand because we believe digital interaction should do more than entertain — it should create measurable value. Every community deserves a space where connection leads to learning, and learning leads to real opportunity. That is the ecosystem we're building.
+        </p>
+        <div class="founder__sig">
+          <div class="founder__avatar">B</div>
+          <div>
+            <strong>The Bloomlaand Team</strong>
+            <span>Founders & Builders</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#" class="footer__logo">Bloom<span>laand</span></a>
+          <p>Transforming fragmented communication into learning, opportunity, and value.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="Twitter">𝕏</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Instagram">◻</a>
+          </div>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4>Platform</h4>
+            <a href="#solution">Intalock</a>
+            <a href="#solution">Classroom</a>
+            <a href="#solution">MarketHub</a>
+          </div>
+          <div class="footer__col">
+            <h4>Company</h4>
+            <a href="#founder">About</a>
+            <a href="mailto:hello@bloomlaand.com">Contact</a>
+            <a href="#waitlist">Early Access</a>
+          </div>
+          <div class="footer__col">
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 Bloomlaand. All rights reserved.</p>
+        <p>Built with purpose. Growing with community.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
