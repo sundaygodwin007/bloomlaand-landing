@@ -37,11 +37,11 @@
         <span class="sidebar__icon">⚙️</span> Settings
       </a>
     </nav>
-    <div class="sidebar__user">
-      <div class="sidebar__avatar">A</div>
+      <div class="sidebar__user">
+      <div class="sidebar__avatar">S</div>
       <div class="sidebar__user-info">
-        <strong>Adewale Bloom</strong>
-        <span>@adewale</span>
+        <strong>Sunday Godwin</strong>
+        <span>@</span>
       </div>
       <button class="sidebar__logout" title="Log out">↩</button>
     </div>
@@ -89,7 +89,7 @@
             <div class="balance-card__meta">
               <div>
                 <span class="balance-card__meta-label">Account Name</span>
-                <span class="balance-card__meta-val">Adewale Bloom</span>
+                <span class="balance-card__meta-val">Sunday Godwin</span>
               </div>
               <div>
                 <span class="balance-card__meta-label">Wallet ID</span>
@@ -195,6 +195,21 @@
               <img src="https://website-v3-assets.s3.amazonaws.com/assets/img/hero/Paystack-mark-white-twitter.png" alt="Paystack" class="pay-btn__logo" onerror="this.style.display='none'"/>
             </button>
             <p class="pay-note">Secured by Paystack. 1.5% + ₦100 fee applies above ₦2,500.</p>
+            <div class="payment-info">
+              <div class="provider-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Paystack_logo.png" alt="Paystack"/>
+                <img src="https://flutterwave.com/images/logo.svg" alt="Flutterwave"/>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa_2021.svg" alt="Visa"/>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.svg" alt="Mastercard"/>
+              </div>
+              <ul>
+                <li><strong>Accepted:</strong> Debit/Credit cards (Visa, Mastercard), Bank transfer, USSD (Paystack).</li>
+                <li><strong>Currencies:</strong> NGN (Paystack), NGN/USD/GHS/KES and more (Flutterwave).</li>
+                <li><strong>Fees:</strong> Paystack fees apply (example: 1.5% + ₦100). Provider fees may vary.</li>
+                <li><strong>Testing:</strong> Replace `PAYSTACK_PUBLIC_KEY` and `FLUTTERWAVE_PUBLIC_KEY` in `wallet.js` with your live keys. In test mode the page simulates payments.</li>
+                <li><strong>Docs:</strong> See Paystack and Flutterwave docs for test card numbers and full integration guides.</li>
+              </ul>
+            </div>
           </div>
 
           <div class="panel-divider">
@@ -459,6 +474,48 @@
       <button class="pay-btn pay-btn--paystack" id="modalBtn">Done</button>
     </div>
   </div>
+
+    <!-- PAYMENT INFO / CARD ENTRY MODAL -->
+    <div class="modal-overlay" id="paymentInfoOverlay">
+      <div class="modal" id="paymentInfoModal">
+        <button class="modal__close" id="paymentInfoClose">✕</button>
+        <div class="modal__icon">💳</div>
+        <h3 class="modal__title" id="paymentInfoTitle">Enter card details</h3>
+        <p class="modal__body" id="paymentInfoBody">Provide your card details to proceed with payment.</p>
+        <div class="modal__detail">
+          <div class="form-group">
+            <label>Amount</label>
+            <div id="paymentInfoAmount" style="font-weight:700;">₦0.00</div>
+          </div>
+          <div class="form-group">
+            <label>Cardholder name</label>
+            <input id="cardName" placeholder="Full name on card" />
+          </div>
+          <div class="form-row" style="display:flex;gap:10px;">
+            <div class="form-group" style="flex:2">
+              <label>Card number</label>
+              <input id="cardNumber" placeholder="4242 4242 4242 4242" />
+            </div>
+            <div class="form-group" style="flex:1">
+              <label>Expiry (MM/YY)</label>
+              <input id="cardExpiry" placeholder="08/26" />
+            </div>
+            <div class="form-group" style="flex:1">
+              <label>CVV</label>
+              <input id="cardCvv" placeholder="123" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input id="cardEmail" value="Godwin@bloomlaand.com" />
+          </div>
+        </div>
+        <div class="modal__actions">
+          <button class="pay-btn pay-btn--ghost" id="paymentInfoCancel">Cancel</button>
+          <button class="pay-btn pay-btn--paystack" id="paymentInfoConfirm">Pay now</button>
+        </div>
+      </div>
+    </div>
 
   <!-- SERVICE PAYMENT MODAL -->
   <div class="modal-overlay" id="serviceModalOverlay">

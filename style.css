@@ -1171,6 +1171,30 @@ body {
 
 .flow__mobile { display: none; }
 
+/* ─── CUSTOM SCROLLBAR ─── */
+/* Cross-browser scrollbar styling for a modern, subtle look */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232,184,75,0.6) rgba(0,0,0,0.06);
+}
+
+/* WebKit browsers */
+*::-webkit-scrollbar { width: 12px; height: 12px; }
+*::-webkit-scrollbar-track { background: transparent; border-radius: 999px; }
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(232,184,75,0.95), rgba(108,92,231,0.85));
+  border-radius: 999px;
+  border: 3px solid rgba(0,0,0,0.0);
+}
+*::-webkit-scrollbar-thumb:hover { filter: brightness(1.03); }
+
+/* Slightly larger thumb for main scrollable regions */
+.nav__mobile::-webkit-scrollbar, .nav__mobile { scrollbar-width: thin; }
+.nav__mobile::-webkit-scrollbar-thumb { background: rgba(232,184,75,0.6); }
+.sidebar::-webkit-scrollbar { width: 10px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(232,184,75,0.5); border-radius: 999px; }
+
+
 /* ─── WAITLIST ─── */
 .waitlist { background: var(--gold); }
 

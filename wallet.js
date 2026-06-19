@@ -17,8 +17,8 @@
 // Replace these with your real keys before going live
 const PAYSTACK_PUBLIC_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 const FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxxxxxxx-X';
-const USER_EMAIL = 'adewale@bloomlaand.com';
-const USER_NAME = 'Adewale Bloom';
+const USER_EMAIL = 'Godwin@bloomlaand.com';
+const USER_NAME = 'Sunday Godwin';
 const USER_PHONE = '+2348000000000';
 
 /* ─── STATE ─── */
@@ -82,6 +82,45 @@ const serviceModalTitle = document.getElementById('serviceModalTitle');
 const serviceModalBody = document.getElementById('serviceModalBody');
 const serviceModalDetail = document.getElementById('serviceModalDetail');
 
+/* PAYMENT INFO ELEMENTS */
+const paymentInfoOverlay = document.getElementById('paymentInfoOverlay');
+const paymentInfoModal = document.getElementById('paymentInfoModal');
+const paymentInfoAmount = document.getElementById('paymentInfoAmount');
+const paymentInfoClose = document.getElementById('paymentInfoClose');
+const paymentInfoCancel = document.getElementById('paymentInfoCancel');
+const paymentInfoConfirm = document.getElementById('paymentInfoConfirm');
+const cardName = document.getElementById('cardName');
+const cardNumber = document.getElementById('cardNumber');
+const cardExpiry = document.getElementById('cardExpiry');
+const cardCvv = document.getElementById('cardCvv');
+const cardEmail = document.getElementById('cardEmail');
+
+let _pendingPayment = { provider: null, amount: 0, currency: 'NGN' };
+
+function openPaymentInfo(provider, amount, currency='NGN'){
+  _pendingPayment = { provider, amount, currency };
+  paymentInfoAmount.textContent = `${currency === 'NGN' ? '₦' : '$'}${parseFloat(amount).toLocaleString()} `;
+  paymentInfoOverlay.classList.add('open');
+}
+
+function closePaymentInfo(){
+  paymentInfoOverlay.classList.remove('open');
+}
+
+paymentInfoClose?.addEventListener('click', closePaymentInfo);
+paymentInfoCancel?.addEventListener('click', closePaymentInfo);
+paymentInfoOverlay?.addEventListener('click', (e) => { if (e.target === paymentInfoOverlay) closePaymentInfo(); });
+
+// Basic validation helper
+function validateCardFields(){
+  if (!cardName.value.trim()) return 'Enter cardholder name';
+  if (!cardNumber.value.trim() || cardNumber.value.replace(/\s+/g,'').length < 12) return 'Enter a valid card number';
+  if (!cardExpiry.value.trim()) return 'Enter expiry date';
+  if (!cardCvv.value.trim() || cardCvv.value.trim().length < 3) return 'Enter CVV';
+  if (!cardEmail.value.trim() || !cardEmail.value.includes('@')) return 'Enter a valid email';
+  return null;
+}
+
 /* =============================================
    SIDEBAR (mobile)
    ============================================= */
@@ -97,15 +136,40 @@ function closeSidebar() {
   document.body.style.overflow = '';
 }
 
-sidebarToggle?.addEventListener('click', openSidebar);
+// Only allow opening the mobile sidebar via the hamburger on small screens
+sidebarToggle?.addEventListener('click', () => {
+  if (window.innerWidth < 1024) openSidebar();
+});
 sidebarOverlay?.addEventListener('click', closeSidebar);
 
 // Close sidebar when a nav link is clicked on mobile
+// Use the same breakpoint as CSS (<= 768px) so the behaviour matches styles
 sidebar?.querySelectorAll('.sidebar__link').forEach(link => {
   link.addEventListener('click', () => {
-    if (window.innerWidth < 900) closeSidebar();
+    if (window.innerWidth <= 768) closeSidebar();
   });
 });
+
+// Ensure the sidebar is fixed and the hamburger toggle is hidden on laptop view
+function syncSidebarForViewport() {
+  const isLaptopOrBigger = window.innerWidth >= 1024; // laptop threshold
+  if (isLaptopOrBigger) {
+    // Ensure sidebar is visible and overlay is removed
+    sidebar?.classList.remove('open');
+    sidebarOverlay?.classList.remove('open');
+    document.body.style.overflow = '';
+
+    // Hide the mobile topbar toggle so hamburger isn't available
+    if (sidebarToggle) sidebarToggle.style.display = 'none';
+  } else {
+    // Restore toggle visibility for smaller screens
+    if (sidebarToggle) sidebarToggle.style.display = '';
+  }
+}
+
+// Run on load and when resizing to keep behavior consistent
+window.addEventListener('resize', syncSidebarForViewport);
+document.addEventListener('DOMContentLoaded', syncSidebarForViewport);
 
 /* =============================================
    BALANCE CARD FLIP
@@ -216,34 +280,7 @@ paystackBtn?.addEventListener('click', () => {
     showToast('Please enter a minimum of ₦100', 'error');
     return;
   }
-
-  // Check if real key is configured
-  if (PAYSTACK_PUBLIC_KEY.includes('xxxx')) {
-    simulatePayment('paystack', amount, 'NGN');
-    return;
-  }
-
-  const handler = PaystackPop.setup({
-    key: PAYSTACK_PUBLIC_KEY,
-    email: USER_EMAIL,
-    amount: amount * 100, // Paystack uses kobo
-    currency: 'NGN',
-    ref: `BL-PSK-${Date.now()}`,
-    metadata: {
-      custom_fields: [
-        { display_name: 'User', variable_name: 'user', value: USER_NAME },
-        { display_name: 'Wallet Action', variable_name: 'action', value: 'fund_wallet' }
-      ]
-    },
-    callback: function (response) {
-      creditWallet(amount, 'NGN', 'Paystack', response.reference);
-    },
-    onClose: function () {
-      showToast('Payment cancelled.', 'info');
-    }
-  });
-
-  handler.openIframe();
+  openPaymentInfo('paystack', amount, 'NGN');
 });
 
 /* =============================================
@@ -258,40 +295,7 @@ flutterwaveBtn?.addEventListener('click', () => {
     showToast('Please enter a valid amount', 'error');
     return;
   }
-
-  // Check if real key is configured
-  if (FLUTTERWAVE_PUBLIC_KEY.includes('xxxx')) {
-    simulatePayment('flutterwave', amount, currency);
-    return;
-  }
-
-  FlutterwaveCheckout({
-    public_key: FLUTTERWAVE_PUBLIC_KEY,
-    tx_ref: `BL-FLW-${Date.now()}`,
-    amount: amount,
-    currency: currency,
-    payment_options: 'card, mobilemoney, ussd, banktransfer',
-    customer: {
-      email: USER_EMAIL,
-      phone_number: USER_PHONE,
-      name: USER_NAME,
-    },
-    customizations: {
-      title: 'Bloomlaand Wallet',
-      description: 'Fund your Bloomlaand wallet',
-      logo: '',
-    },
-    callback: function (response) {
-      if (response.status === 'successful') {
-        // Convert to NGN if not already
-        const ngnAmount = currency === 'NGN' ? amount : amount * state.exchangeRate;
-        creditWallet(ngnAmount, currency, 'Flutterwave', response.transaction_id);
-      }
-    },
-    onclose: function () {
-      showToast('Payment window closed.', 'info');
-    }
-  });
+  openPaymentInfo('flutterwave', amount, currency);
 });
 
 /* =============================================
@@ -312,6 +316,70 @@ function simulatePayment(provider, amount, currency) {
     creditWallet(ngnAmount, currency, provider === 'paystack' ? 'Paystack' : 'Flutterwave', ref);
   }, 1800);
 }
+
+// When user confirms card details in our modal
+paymentInfoConfirm?.addEventListener('click', () => {
+  const err = validateCardFields();
+  if (err) { showToast(err, 'error'); return; }
+
+  const { provider, amount, currency } = _pendingPayment;
+
+  // Close modal UI
+  closePaymentInfo();
+
+  // If keys are placeholders, simulate payment. Otherwise call provider flow.
+  if (provider === 'paystack'){
+    if (PAYSTACK_PUBLIC_KEY.includes('xxxx')) {
+      simulatePayment('paystack', amount, currency);
+      return;
+    }
+
+    const handler = PaystackPop.setup({
+      key: PAYSTACK_PUBLIC_KEY,
+      email: cardEmail.value || USER_EMAIL,
+      amount: amount * 100,
+      currency: 'NGN',
+      ref: `BL-PSK-${Date.now()}`,
+      metadata: {
+        custom_fields: [
+          { display_name: 'Cardholder', variable_name: 'card_name', value: cardName.value }
+        ]
+      },
+      callback: function (response) {
+        creditWallet(amount, 'NGN', 'Paystack', response.reference);
+      },
+      onClose: function () { showToast('Payment cancelled.', 'info'); }
+    });
+
+    handler.openIframe();
+    return;
+  }
+
+  if (provider === 'flutterwave'){
+    if (FLUTTERWAVE_PUBLIC_KEY.includes('xxxx')) {
+      simulatePayment('flutterwave', amount, currency);
+      return;
+    }
+
+    FlutterwaveCheckout({
+      public_key: FLUTTERWAVE_PUBLIC_KEY,
+      tx_ref: `BL-FLW-${Date.now()}`,
+      amount: amount,
+      currency: currency,
+      payment_options: 'card, mobilemoney, ussd, banktransfer',
+      customer: { email: cardEmail.value || USER_EMAIL, phone_number: USER_PHONE, name: cardName.value || USER_NAME },
+      customizations: { title: 'Bloomlaand Wallet', description: 'Fund your Bloomlaand wallet', logo: '' },
+      callback: function (response) {
+        if (response.status === 'successful') {
+          const ngnAmount = currency === 'NGN' ? amount : amount * state.exchangeRate;
+          creditWallet(ngnAmount, currency, 'Flutterwave', response.transaction_id);
+        }
+      },
+      onclose: function () { showToast('Payment window closed.', 'info'); }
+    });
+    return;
+  }
+});
 
 /* =============================================
    CREDIT WALLET
