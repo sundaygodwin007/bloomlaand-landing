@@ -1551,16 +1551,16 @@ body {
   .main {
     margin-left: 0;
     padding: 80px 20px 40px;
-    padding-right: 36px; /* base right padding on mobile */
+    padding-right: 48px; /* base right padding on mobile */
   }
 
   /* Extra right padding for narrow phones (e.g., Samsung S8 ~360px) */
   @media (max-width: 420px) {
-    .main { padding-right: 44px; }
+    .main { padding-right: 64px; }
   }
 
   @media (max-width: 360px) {
-    .main { padding-right: 52px; }
+    .main { padding-right: 72px; }
   }
 
   .cards-row {
