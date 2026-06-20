@@ -1556,11 +1556,11 @@ body {
 
   /* Extra right padding for narrow phones (e.g., Samsung S8 ~360px) */
   @media (max-width: 420px) {
-    .main { padding-right: 64px; }
+    .main { padding-right: 88px !important; }
   }
 
   @media (max-width: 360px) {
-    .main { padding-right: 72px; }
+    .main { padding-right: 96px !important; }
   }
 
   .cards-row {
